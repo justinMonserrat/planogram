@@ -1,0 +1,86 @@
+// Built-in candy catalog for Planogram Maker.
+//
+// Candy shape:
+//   { id, name, brand, category, packageType, color, image }
+//   category:    "chocolate" | "gummy" | "lto"
+//   packageType: "peg" (hangs on a peg) | "box" (sits in the bin/shelf)
+//   color:       hex used to tint the candy's tile
+//   image:       optional product photo URL. Leave "" to use the color tile.
+//                You can also paste/override image URLs in the app (persisted),
+//                so you don't have to edit this file.
+
+export const CATEGORIES = [
+  { id: 'chocolate', label: 'Chocolate', color: '#7a4a2b' },
+  { id: 'gummy', label: 'Gummy & Chewy', color: '#2f9e44' },
+  { id: 'lto', label: 'LTO / Novelty', color: '#9b51e0' },
+]
+
+export const PACKAGE_TYPES = {
+  peg: { id: 'peg', label: 'Peg' },
+  box: { id: 'box', label: 'Box' },
+}
+
+const rawCandies = [
+  // ---------- PEG CANDIES ----------
+  { id: 'mms-peanut', name: "Peanut M&M's", brand: "M&M's", category: 'chocolate', packageType: 'peg', color: '#f2c200', image: '/images/mms-peanut.png' },
+  { id: 'mms-chocolate', name: "Chocolate M&M's", brand: "M&M's", category: 'chocolate', packageType: 'peg', color: '#6b4226', image: '/images/mms-chocolate.png' },
+  { id: 'mms-peanut-butter', name: "Peanut Butter M&M's", brand: "M&M's", category: 'chocolate', packageType: 'peg', color: '#e8772e', image: '/images/mms-peanutbutter.png' },
+  { id: 'reeses-pieces', name: "Reese's Pieces", brand: "Reese's", category: 'chocolate', packageType: 'peg', color: '#f7901e', image: '/images/reeses-pieces.png' },
+  { id: 'kit-kats', name: 'Kit Kats', brand: 'Hershey', category: 'chocolate', packageType: 'peg', color: '#d8232a', image: '/images/kitkats.png' },
+  { id: 'cookie-dough-bites', name: 'Cookie Dough Bites', brand: 'Cookie Dough Bites', category: 'chocolate', packageType: 'peg', color: '#c9a36a', image: '/images/cc-cookie-dough-bites.png' },
+  { id: 'twinkies-cookie-dough', name: 'Twinkies Cookie Dough', brand: 'Cookie Dough Bites', category: 'chocolate', packageType: 'peg', color: '#e8c34a', image: '/images/twinkies-cookie-dough-bites.png' },
+  { id: 'tuxedos-chocolate-almonds', name: 'Tuxedos Choc Almonds', brand: 'Tuxedos', category: 'chocolate', packageType: 'peg', color: '#2e2620', image: '/images/tuxedos-choc-almonds.png' },
+  { id: 'sunmaid-chocolate-raisins', name: 'Sun-Maid Chocolate Raisins', brand: 'Sun-Maid', category: 'chocolate', packageType: 'peg', color: '#7a1f2b', image: '/images/sunmaid-choc-raisins.png' },
+  { id: 'twizzlers', name: 'Twizzlers', brand: 'Twizzlers', category: 'gummy', packageType: 'peg', color: '#c0143c', image: '/images/twizzlers.png' },
+  { id: 'sweetarts-ropes', name: 'SweeTarts Ropes', brand: 'SweeTarts', category: 'gummy', packageType: 'peg', color: '#6a4fb3', image: '/images/sweet-tarts-cherry.png' },
+  { id: 'sour-jacks', name: 'Sour Jacks', brand: 'Sour Jacks', category: 'gummy', packageType: 'peg', color: '#67a83b', image: '/images/sourjacks.png' },
+  { id: 'haribo-goldbears', name: 'Haribo Goldbears', brand: 'Haribo', category: 'gummy', packageType: 'peg', color: '#f2b705', image: '/images/haribo-goldbears.png' },
+  { id: 'haribo-sour-sodas', name: 'Haribo Sour Sodas', brand: 'Haribo', category: 'gummy', packageType: 'peg', color: '#3aa0c9', image: '/images/haribo-soursodas.png' },
+  { id: 'haribo-twin-snakes', name: 'Haribo Twin Snakes', brand: 'Haribo', category: 'gummy', packageType: 'peg', color: '#4caa52', image: '/images/haribo-twinsnakes.png' },
+  { id: 'airheads-soft-filled-bites', name: 'Airheads Soft Filled Bites', brand: 'Airheads', category: 'gummy', packageType: 'peg', color: '#3f7fd0', image: '/images/airheads-softfilled.png' },
+  { id: 'airheads-xtremes-bites', name: 'Airheads Xtremes Bites', brand: 'Airheads', category: 'gummy', packageType: 'peg', color: '#e0457b', image: '/images/airheads-xtremes.png' },
+  { id: 'skittles-original', name: 'Skittles Original', brand: 'Skittles', category: 'gummy', packageType: 'peg', color: '#d2202e', image: '/images/skittles-original.png' },
+  { id: 'skittles-sour', name: 'Skittles Sour', brand: 'Skittles', category: 'gummy', packageType: 'peg', color: '#7ac043', image: '/images/skittles-sour.png' },
+  { id: 'skittles-gummy', name: 'Skittles Gummy', brand: 'Skittles', category: 'gummy', packageType: 'peg', color: '#6f3b91', image: '/images/skittles-gummies.png' },
+  { id: 'starburst-minis', name: 'Starburst Minis', brand: 'Starburst', category: 'gummy', packageType: 'peg', color: '#e34a6f', image: '/images/starburst-mini.png' },
+  { id: 'sour-patch-kids', name: 'Sour Patch Kids', brand: 'Sour Patch Kids', category: 'gummy', packageType: 'peg', color: '#5cb85c', image: '/images/sourpatchkids-original.png' },
+  { id: 'sour-patch-kids-watermelon', name: 'Sour Patch Kids Watermelon', brand: 'Sour Patch Kids', category: 'gummy', packageType: 'peg', color: '#e35d6a', image: '/images/sourpatchkids-watermelon.png' },
+  { id: 'trolli-sour-brite-crawlers', name: 'Trolli Sour Brite Crawlers', brand: 'Trolli', category: 'gummy', packageType: 'peg', color: '#7ac043', image: '/images/trolli-sourbrite.png' },
+  { id: 'trolli-duos', name: 'Trolli Duos', brand: 'Trolli', category: 'gummy', packageType: 'peg', color: '#b5559e', image: '/images/trolli-duos.png' },
+  { id: 'welchs-fruit-snacks', name: "Welch's Fruit Snacks", brand: "Welch's", category: 'gummy', packageType: 'peg', color: '#6f3b91', image: '/images/welchs-fruitsnacks.png' },
+  { id: 'welchs-juicefuls', name: "Welch's Juicefuls", brand: "Welch's", category: 'gummy', packageType: 'peg', color: '#9c2a6b', image: '/images/welchs-juicefuls.png' },
+  { id: 'lifesavers-gummies-5-flavors', name: 'Life Savers 5 Flavors', brand: 'Life Savers', category: 'gummy', packageType: 'peg', color: '#2aa7a0', image: '/images/lifesavers-gummies-5-flavors.png' },
+  { id: 'lifesavers-gummies-fruit-rings', name: 'Life Savers Fruit Rings', brand: 'Life Savers', category: 'gummy', packageType: 'peg', color: '#2aa7a0', image: '/images/lifesavers-gummies-fruitrings.png' },
+  { id: 'nerds-gummy-clusters-very-berry', name: 'Nerds Clusters Very Berry', brand: 'Nerds', category: 'gummy', packageType: 'peg', color: '#e64980', image: '/images/nerds-clusters-veryberry.png' },
+  { id: 'nerds-gummy-clusters-rainbow', name: 'Nerds Clusters Rainbow', brand: 'Nerds', category: 'gummy', packageType: 'peg', color: '#e64980', image: '/images/nerds-clusters-rainbow.png' },
+  { id: 'hi-chew-fantasy-mix', name: 'Hi-Chew Fantasy Mix', brand: 'Hi-Chew', category: 'gummy', packageType: 'peg', color: '#5aa84a', image: '/images/hichew-fantasy.png' },
+  { id: 'hi-chew-sweet-and-sour', name: 'Hi-Chew Sweet & Sour', brand: 'Hi-Chew', category: 'gummy', packageType: 'peg', color: '#5aa84a', image: '/images/hichew-sweetandsour.png' },
+  { id: 'hi-chew-original', name: 'Hi-Chew Original', brand: 'Hi-Chew', category: 'gummy', packageType: 'peg', color: '#5aa84a', image: '/images/hichew-original.png' },
+  { id: 'swedish-fish', name: 'Swedish Fish', brand: 'Swedish Fish', category: 'gummy', packageType: 'peg', color: '#c8202b', image: '/images/sweedish-fish.png' },
+  { id: 'mike-and-ike', name: 'Mike and Ike', brand: 'Mike and Ike', category: 'gummy', packageType: 'peg', color: '#e8552a', image: '/images/mike-and-ike.png' },
+  { id: 'hello-kitty-cotton-candy', name: 'Hello Kitty Cotton Candy', brand: 'Hello Kitty', category: 'lto', packageType: 'peg', color: '#f49ac1', image: '/images/hellokitty-cottoncandy.png' },
+  { id: 'hello-kitty-sour-gummies', name: 'Hello Kitty Sour Gummies', brand: 'Hello Kitty', category: 'lto', packageType: 'peg', color: '#f49ac1', image: '/images/hellokitty-gummy.png' },
+  { id: 'sour-punch-straws-blueras-lemonade', name: 'Sour Punch Blue/Lemonade', brand: 'Sour Punch', category: 'gummy', packageType: 'peg', color: '#2f7fc1', image: '/images/sourpunch-blueraz-lemonade.png' },
+
+  // ---------- BOX / BIN CANDIES ----------
+  { id: 'milk-duds', name: 'Milk Duds', brand: 'Hershey', category: 'chocolate', packageType: 'box', color: '#5b3a23', image: '/images/milkduds.png' },
+  { id: 'buncha-crunch', name: 'Buncha Crunch', brand: 'Nestlé Crunch', category: 'chocolate', packageType: 'box', color: '#b03a2e', image: '/images/buncha-crunch.png' },
+  { id: 'butterfinger', name: 'Butterfinger', brand: 'Butterfinger', category: 'chocolate', packageType: 'box', color: '#f0a31d', image: '/images/butterfingers.png' },
+  { id: 'sour-punch-straws-rainbow', name: 'Sour Punch Straws Rainbow', brand: 'Sour Punch', category: 'gummy', packageType: 'box', color: '#2f7fc1', image: '/images/sourpunch-straws-rainbow.png' },
+  { id: 'junior-mints', name: 'Junior Mints', brand: 'Junior Mints', category: 'chocolate', packageType: 'box', color: '#1f7a3d', image: '/images/juniormints.png' },
+  { id: 'red-vines', name: 'Red Vines', brand: 'Red Vines', category: 'gummy', packageType: 'box', color: '#c0142c', image: '/images/redvines.png' },
+  { id: 'mint-chocolate-cookie-dough-bites', name: 'Mint Chocolate Cookie Dough Bites', brand: 'Cookie Dough Bites', category: 'chocolate', packageType: 'box', color: '#79c2a3', image: '/images/mint-cc-cookie-dough-bites.png' },
+]
+
+// Every candy gets an `image` field (default ""). Fill these in here, or set
+// them in-app (stored as overrides) — either way the tile shows the photo when
+// present and falls back to the color tile when empty.
+export const candies = rawCandies.map((c) => ({ image: '', ...c }))
+
+export const candyById = Object.fromEntries(candies.map((c) => [c.id, c]))
+
+export const categoryColor = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.color]))
+
+export function getCandy(id) {
+  return candyById[id]
+}
