@@ -6,9 +6,11 @@ import {
   useSensor,
   useSensors,
   closestCenter,
+  pointerWithin,
 } from '@dnd-kit/core'
 
 import Catalog from './components/Catalog.jsx'
+import InstructionsModal from './components/InstructionsModal.jsx'
 import RackCanvas from './components/RackCanvas.jsx'
 import Toolbar from './components/Toolbar.jsx'
 import CandyImage from './components/CandyImage.jsx'
@@ -18,7 +20,8 @@ import { useHistory } from './hooks/useHistory.js'
 
 import { storage } from './storage/storage.js'
 import { candies as builtinCandies } from './data/candies.js'
-import { exportJSON, exportPNG, readJSONFile } from './lib/exporters.js'
+import { getDefaultRack } from './lib/defaultLayout.js'
+import { exportJSON, exportPNG, exportBayPNGs, readJSONFile } from './lib/exporters.js'
 import {
   uid,
   makeRack,
@@ -60,8 +63,10 @@ export default function App() {
   const [customCandies, setCustomCandies] = useState([])
   const [preview, setPreview] = useState(true)
   const [exporting, setExporting] = useState(false)
+  const [showInstructions, setShowInstructions] = useState(false)
 
   const rackNodeRef = useRef(null)
+  const bayRefs = useRef({})
   const statusTimer = useRef(null)
 
   const sensors = useSensors(
@@ -88,10 +93,14 @@ export default function App() {
         storage.getCustomCandies(),
       ])
       if (!mounted) return
-      resetRack(wip ? normalizeRack(wip) : makeRack())
+      resetRack(wip ? normalizeRack(wip) : getDefaultRack())
       setImageOverrides(overrides || {})
       setCustomCandies(custom || [])
       await refreshLayouts()
+      if (!localStorage.getItem('planogram:instructions-seen')) {
+        setShowInstructions(true)
+        localStorage.setItem('planogram:instructions-seen', '1')
+      }
       setReady(true)
     })()
     return () => {
@@ -248,6 +257,11 @@ export default function App() {
     const { active, over } = event
     if (!over) return
     const activeData = active.data.current
+
+    if (over.data.current?.kind === 'catalog-cancel' && activeData?.type === 'catalog') {
+      return
+    }
+
     const dest = resolveDest(over.data.current)
     if (!dest) return
 
@@ -292,9 +306,9 @@ export default function App() {
     flash(`Saved “${rack.name}”`, 'success')
   }
 
-  const onLoad = async () => {
-    if (!selectedLayoutId) return
-    const loaded = await storage.getLayout(selectedLayoutId)
+  const onLoad = async (layoutId = selectedLayoutId) => {
+    if (!layoutId) return
+    const loaded = await storage.getLayout(layoutId)
     if (loaded) {
       resetRack(normalizeRack(loaded))
       flash(`Loaded “${loaded.name}”`, 'success')
@@ -334,6 +348,37 @@ export default function App() {
     }
   }
 
+  const onExportBayPNGs = async () => {
+    if (rack.bays.length < 2) return
+    setExporting(true)
+    try {
+      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
+      for (const bay of rack.bays) {
+        await waitForImages(bayRefs.current[bay.id])
+      }
+      await exportBayPNGs(rack, bayRefs.current)
+      flash(`Exported ${rack.bays.length} bay PNGs`, 'success')
+    } catch (err) {
+      console.error(err)
+      flash('Bay PNG export failed', 'error')
+    } finally {
+      setExporting(false)
+    }
+  }
+
+  const onLoadDefault = () => {
+    if (
+      countPlacements(rack) > 0 &&
+      !window.confirm('Replace the current rack with the default layout? Unsaved changes will be lost.')
+    ) {
+      return
+    }
+    resetRack(getDefaultRack())
+    setSelectedLayoutId('')
+    setShowInstructions(false)
+    flash('Loaded default layout', 'success')
+  }
+
   const onImportJSON = async (file) => {
     try {
       const imported = await readJSONFile(file)
@@ -361,19 +406,26 @@ export default function App() {
               <h1 className="app-header__title">Planogram Maker</h1>
               <p className="app-header__subtitle">Candy planogram builder for concession racks</p>
             </div>
+            <button
+              className="btn btn--small app-header__help"
+              onClick={() => setShowInstructions(true)}
+            >
+              How it works
+            </button>
           </header>
 
           <Toolbar
-            rackName={rack.name}
-            onRenameRack={onRenameRack}
             savedLayouts={savedLayouts}
             selectedLayoutId={selectedLayoutId}
             onSelectLayout={setSelectedLayoutId}
             onNew={onNew}
             onSave={onSave}
             onLoad={onLoad}
+            onLoadDefault={onLoadDefault}
             onDelete={onDelete}
             onExportPNG={onExportPNG}
+            onExportBayPNGs={onExportBayPNGs}
+            bayCount={rack.bays.length}
             onExportJSON={onExportJSON}
             onImportJSON={onImportJSON}
             preview={preview}
@@ -386,7 +438,17 @@ export default function App() {
 
           <DndContext
             sensors={sensors}
-            collisionDetection={closestCenter}
+            collisionDetection={(args) => {
+              const pointerHits = pointerWithin(args)
+              if (pointerHits.length > 0) {
+                if (args.active?.data?.current?.type === 'catalog') {
+                  const catalogHit = pointerHits.find((h) => h.id === 'catalog-panel')
+                  if (catalogHit) return [catalogHit]
+                }
+                return pointerHits
+              }
+              return closestCenter(args)
+            }}
             onDragStart={handleDragStart}
             onDragEnd={handleDragEnd}
             onDragCancel={() => setActiveDrag(null)}
@@ -396,8 +458,10 @@ export default function App() {
               <main className="workspace">
                 <RackCanvas
                   ref={rackNodeRef}
+                  bayRefs={bayRefs}
                   rack={rack}
                   preview={showPreview}
+                  onRenameRack={onRenameRack}
                   onRenameBay={onRenameBay}
                   onRemoveBay={onRemoveBay}
                   onAddBay={onAddBay}
@@ -419,6 +483,10 @@ export default function App() {
               ) : null}
             </DragOverlay>
           </DndContext>
+
+          {showInstructions && (
+            <InstructionsModal onClose={() => setShowInstructions(false)} />
+          )}
 
           {status && <div className={`toast toast--${status.type}`}>{status.msg}</div>}
         </div>

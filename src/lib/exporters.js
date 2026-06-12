@@ -21,14 +21,25 @@ export function exportJSON(rack) {
   URL.revokeObjectURL(url)
 }
 
+const pngOptions = {
+  pixelRatio: 2,
+  backgroundColor: '#eef1f5',
+  cacheBust: true,
+}
+
 export async function exportPNG(node, rack) {
   if (!node) return
-  const dataUrl = await toPng(node, {
-    pixelRatio: 2,
-    backgroundColor: '#eef1f5',
-    cacheBust: true,
-  })
+  const dataUrl = await toPng(node, pngOptions)
   triggerDownload(dataUrl, `${slugify(rack.name)}.png`)
+}
+
+export async function exportBayPNGs(rack, bayNodes) {
+  for (const bay of rack.bays) {
+    const node = bayNodes[bay.id]
+    if (!node) continue
+    const dataUrl = await toPng(node, pngOptions)
+    triggerDownload(dataUrl, `${slugify(rack.name)}-${slugify(bay.label)}.png`)
+  }
 }
 
 export function readJSONFile(file) {

@@ -5,6 +5,7 @@ const RackCanvas = forwardRef(function RackCanvas(
   {
     rack,
     preview,
+    onRenameRack,
     onRenameBay,
     onRemoveBay,
     onAddBay,
@@ -13,19 +14,37 @@ const RackCanvas = forwardRef(function RackCanvas(
     onAddCol,
     onRemoveCol,
     onRemovePlacement,
+    bayRefs,
   },
   ref,
 ) {
   const canRemoveBay = rack.bays.length > 1
 
+  const setBayRef = (bayId) => (el) => {
+    if (!bayRefs?.current) return
+    if (el) bayRefs.current[bayId] = el
+    else delete bayRefs.current[bayId]
+  }
+
   return (
     <div className="rack-scroll">
       <div className={`rack${preview ? ' rack--preview' : ''}`} ref={ref}>
-        <div className="rack__title-strip">{rack.name}</div>
+        {preview ? (
+          <div className="rack__title-strip">{rack.name}</div>
+        ) : (
+          <input
+            className="rack__title-strip rack__title-input"
+            value={rack.name}
+            onChange={(e) => onRenameRack(e.target.value)}
+            aria-label="Rack name"
+            placeholder="Untitled Rack"
+          />
+        )}
         <div className="rack__bays">
           {rack.bays.map((bay) => (
             <Bay
               key={bay.id}
+              ref={setBayRef(bay.id)}
               bay={bay}
               canRemove={canRemoveBay}
               preview={preview}

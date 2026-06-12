@@ -1,7 +1,8 @@
+import { forwardRef } from 'react'
 import PegSlot from './PegSlot.jsx'
 import BoxShelf from './BoxShelf.jsx'
 
-export default function Bay({
+const Bay = forwardRef(function Bay({
   bay,
   canRemove,
   preview,
@@ -12,17 +13,17 @@ export default function Bay({
   onAddCol,
   onRemoveCol,
   onRemovePlacement,
-}) {
+}, ref) {
   const cols = bay.cols
   const colIndexes = Array.from({ length: cols }, (_, i) => i)
   const canRemoveRow = bay.pegTiers.length > 1
   const canRemoveCol = cols > 1
 
   return (
-    <section className="bay">
+    <section className="bay" ref={ref}>
       <header className="bay__header">
         {preview ? (
-          <span className="bay__label bay__label--static">{bay.label}</span>
+          <div className="bay__label bay__label--static">{bay.label}</div>
         ) : (
           <input
             className="bay__label"
@@ -139,4 +140,6 @@ export default function Bay({
       />
     </section>
   )
-}
+})
+
+export default Bay

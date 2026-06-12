@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "rack": {
+    "id": "default-rack",
+    "name": "Default Candy Planogram",
+    "bays": [
+      {
+        "id": "bay_rkihkc6i89c",
+        "label": "Lobby Candy",
+        "pegTiers": [
+          {
+            "id": "tier_4s7h1cli89c",
+            "slots": [
+              {
+                "id": "pl_szeq3ljiuvf",
+                "candyId": "mms-peanut",
+                "facings": 1
+              },
+              {
+                "id": "pl_7huajqwq04q",
+                "candyId": "mms-peanut",
+                "facings": 1
+              },
+              {
+                "id": "pl_2gr0nbjptax",
+                "candyId": "mms-chocolate",
+                "facings": 1
+              },
+              {
+                "id": "pl_lrhkcb1abun",
+                "candyId": "mms-peanut-butter",
+                "facings": 1
+              },
+              {
+                "id": "pl_4mhbea1amc1",
+                "candyId": "reeses-pieces",
+                "facings": 1
+              },
+              {
+                "id": "pl_44mfgsrancy",
+                "candyId": "kit-kats",
+                "facings": 1
+              },
+              {
+                "id": "pl_n1hgporaoe2",
+                "candyId": "kit-kats",
+                "facings": 1
+              },
+              {
+                "id": "pl_24zrco8b812",
+                "candyId": "twizzlers",
+                "facings": 1
+              },
+              {
+                "id": "pl_ym4gvwobbzh",
+                "candyId": "haribo-goldbears",
+                "facings": 1
+              },
+              {
+                "id": "pl_vpe3udnbpb5",
+                "candyId": "airheads-soft-filled-bites",
+                "facings": 1
+              },
+              {
+                "id": "pl_q0jq7ax82z8",
+                "candyId": "lifesavers-gummies-5-flavors"
+              },
+              {
+                "id": "pl_09rp9uyctgy",
+                "candyId": "sour-patch-kids",
+                "facings": 1
+              },
+              {
+                "id": "pl_hv2n521d07p",
+                "candyId": "welchs-fruit-snacks",
+                "facings": 1
+              },
+              {
+                "id": "pl_9g4ux3bdj0v",
+                "candyId": "trolli-sour-brite-crawlers",
+                "facings": 1
+              },
+              {
+                "id": "pl_0yjybgy8d2l",
+                "candyId": "skittles-original"
+              },
+              {
+                "id": "pl_hy9m8ton9vl",
+                "candyId": "nerds-gummy-clusters-very-berry"
+              },
+              {
+                "id": "pl_5lva097mo5m",
+                "candyId": "hi-chew-fantasy-mix"
+              },
+              {
+                "id": "pl_thttx1mesvx",
+                "candyId": "swedish-fish",
+                "facings": 1
+              }
+            ]
+          },
+          {
+            "id": "tier_scfwvqci89c",
+            "slots": [
+              {
+                "id": "pl_0p5eiq7j4fo",
+                "candyId": "mms-peanut",
+                "facings": 1
+              },
+              {
+                "id": "pl_wlbdwh7q0yj",
+                "candyId": "mms-peanut",
+                "facings": 1
+              },
+              {
+                "id": "pl_w4yb89tpu5h",
+                "candyId": "mms-chocolate",
+                "facings": 1
+              },
+              {
+                "id": "pl_e6yo7k3acu3",
+                "candyId": "mms-peanut-butter",
+                "facings": 1
+              },
+              {
+                "id": "pl_dnb09hdb2ar",
+                "candyId": "tuxedos-chocolate-almonds",
+                "facings": 1
+              },
+              {
+                "id": "pl_okwsej8ay8x",
+                "candyId": "twinkies-cookie-dough",
+                "facings": 1
+              },
+              {
+                "id": "pl_pmhr5h7aumz",
+                "candyId": "cookie-dough-bites",
+                "facings": 1
+              },
+              {
+                "id": "pl_q6gg74eb9ej",
+                "candyId": "sweetarts-ropes",
+                "facings": 1
+              },
+              {
+                "id": "pl_qdpx2bhbger",
+                "candyId": "haribo-twin-snakes",
+                "facings": 1
+              },
+              {
+                "id": "pl_6qxzbvtbmzq",
+                "candyId": "airheads-xtremes-bites",
+                "facings": 1
+              },
+              {
+                "id": "pl_obh3eup84p9",
+                "candyId": "lifesavers-gummies-fruit-rings"
+              },
+              {
+                "id": "pl_zqgj15ycv3n",
+                "candyId": "sour-patch-kids",
+                "facings": 1
+              },
+              {
+                "id": "pl_b5valotd1cm",
+                "candyId": "welchs-fruit-snacks",
+                "facings": 1
+              },
+              {
+                "id": "pl_t9kxyzcdk8t",
+                "candyId": "trolli-sour-brite-crawlers",
+                "facings": 1
+              },
+              {
+                "id": "pl_vwmi21w8eup",
+                "candyId": "skittles-sour"
+              },
+              {
+                "id": "pl_jtxavlwnb4d",
+                "candyId": "nerds-gummy-clusters-rainbow"
+              },
+              {
+                "id": "pl_m10u3symqw9",
+                "candyId": "hi-chew-original"
+              },
+              {
+                "id": "pl_m1d9m6e8ytt",
+                "candyId": "swedish-fish"
+              }
+            ]
+          },
+          {
+            "id": "tier_vilkcbihndz",
+            "slots": [
+              {
+                "id": "pl_fu3lp44pcoc",
+                "candyId": "mms-peanut",
+                "facings": 1
+              },
+              {
+                "id": "pl_pdy1qiri7jd",
+                "candyId": "mms-peanut",
+                "facings": 1
+              },
+              {
+                "id": "pl_3ememrfpvcp",
+                "candyId": "mms-chocolate",
+                "facings": 1
+              },
+              {
+                "id": "pl_y1tx79yadu4",
+                "candyId": "mms-peanut-butter",
+                "facings": 1
+              },
+              {
+                "id": "pl_e486cg3b46e",
+                "candyId": "sunmaid-chocolate-raisins",
+                "facings": 1
+              },
+              {
+                "id": "pl_g0v5kubawjg",
+                "candyId": "cookie-dough-bites",
+                "facings": 1
+              },
+              {
+                "id": "pl_mw1c3oear6k",
+                "candyId": "cookie-dough-bites",
+                "facings": 1
+              },
+              {
+                "id": "pl_veaz6ejbag8",
+                "candyId": "sour-jacks",
+                "facings": 1
+              },
+              {
+                "id": "pl_o1kgg25bhny",
+                "candyId": "haribo-sour-sodas",
+                "facings": 1
+              },
+              {
+                "id": "pl_tizddysbo5s",
+                "candyId": "airheads-xtremes-bites",
+                "facings": 1
+              },
+              {
+                "id": "pl_7wy4n50cr30",
+                "candyId": "starburst-minis",
+                "facings": 1
+              },
+              {
+                "id": "pl_g60chflcw8b",
+                "candyId": "sour-patch-kids-watermelon",
+                "facings": 1
+              },
+              {
+                "id": "pl_28xfop2d2ec",
+                "candyId": "welchs-juicefuls",
+                "facings": 1
+              },
+              {
+                "id": "pl_doke73odm41",
+                "candyId": "trolli-duos",
+                "facings": 1
+              },
+              {
+                "id": "pl_cpcwgv7e60b",
+                "candyId": "mike-and-ike",
+                "facings": 1
+              },
+              {
+                "id": "pl_n5u0gxmeetz",
+                "candyId": "hello-kitty-cotton-candy",
+                "facings": 1
+              },
+              {
+                "id": "pl_2orwpzx8pfd",
+                "candyId": "hello-kitty-cotton-candy"
+              },
+              {
+                "id": "pl_k0hn1hgnnmz",
+                "candyId": "sour-punch-straws-blueras-lemonade"
+              }
+            ]
+          }
+        ],
+        "boxShelf": [
+          {
+            "id": "pl_u5o99qag8mg",
+            "candyId": "milk-duds",
+            "facings": 1
+          },
+          {
+            "id": "pl_bevpgcvgbj9",
+            "candyId": "buncha-crunch",
+            "facings": 1
+          },
+          {
+            "id": "pl_5feku4hchht",
+            "candyId": "sour-punch-straws-rainbow"
+          },
+          {
+            "id": "pl_tg11r56ggp6",
+            "candyId": "mint-chocolate-cookie-dough-bites",
+            "facings": 1
+          },
+          {
+            "id": "pl_v5mqsvzgiv4",
+            "candyId": "junior-mints",
+            "facings": 1
+          },
+          {
+            "id": "pl_tvnxy17goyy",
+            "candyId": "red-vines",
+            "facings": 1
+          },
+          {
+            "id": "pl_30g0ujggr0f",
+            "candyId": "butterfinger",
+            "facings": 1
+          },
+          {
+            "id": "pl_3y9oes7gvs7",
+            "candyId": "buncha-crunch",
+            "facings": 1
+          },
+          {
+            "id": "pl_99m2teombg8",
+            "candyId": "sour-punch-straws-rainbow"
+          },
+          {
+            "id": "pl_fhjd2snh7o3",
+            "candyId": "mint-chocolate-cookie-dough-bites",
+            "facings": 1
+          },
+          {
+            "id": "pl_pg7xw0chcvi",
+            "candyId": "junior-mints",
+            "facings": 1
+          },
+          {
+            "id": "pl_ggsazmjhfci",
+            "candyId": "red-vines",
+            "facings": 1
+          }
+        ],
+        "cols": 18
+      }
+    ]
+  }
+}

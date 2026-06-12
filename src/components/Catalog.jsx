@@ -1,10 +1,15 @@
 import { useMemo, useState } from 'react'
+import { useDroppable } from '@dnd-kit/core'
 import { CATEGORIES, PACKAGE_TYPES } from '../data/candies.js'
 import { useCandies } from '../context/CandyContext.jsx'
 import CatalogTile from './CatalogTile.jsx'
 import AddCandyModal from './AddCandyModal.jsx'
 
 export default function Catalog() {
+  const { setNodeRef } = useDroppable({
+    id: 'catalog-panel',
+    data: { kind: 'catalog-cancel' },
+  })
   const { candies, isBuiltin, addCandy, deleteCandy } = useCandies()
   const [query, setQuery] = useState('')
   const [activeCat, setActiveCat] = useState('all')
@@ -22,7 +27,7 @@ export default function Catalog() {
   }, [candies, query, activeCat, activePkg])
 
   return (
-    <aside className="catalog">
+    <aside className="catalog" ref={setNodeRef}>
       <div className="catalog__header">
         <h2 className="catalog__title">Candy Catalog</h2>
         <button className="btn btn--small btn--primary" onClick={() => setShowAdd(true)}>
