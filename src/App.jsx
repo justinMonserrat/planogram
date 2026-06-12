@@ -12,6 +12,7 @@ import {
 import Catalog from './components/Catalog.jsx'
 import InstructionsModal from './components/InstructionsModal.jsx'
 import RackCanvas from './components/RackCanvas.jsx'
+import RackViewport from './components/RackViewport.jsx'
 import Toolbar from './components/Toolbar.jsx'
 import CandyImage from './components/CandyImage.jsx'
 import { ImagesProvider } from './context/ImagesContext.jsx'
@@ -66,6 +67,7 @@ export default function App() {
   const [showInstructions, setShowInstructions] = useState(false)
 
   const rackNodeRef = useRef(null)
+  const viewportRef = useRef(null)
   const bayRefs = useRef({})
   const statusTimer = useRef(null)
 
@@ -336,9 +338,10 @@ export default function App() {
     // Capture the clean "presentation" rendering regardless of edit/preview state.
     setExporting(true)
     try {
-      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
-      await waitForImages(rackNodeRef.current)
-      await exportPNG(rackNodeRef.current, rack)
+      await viewportRef.current?.withNativeZoom(async () => {
+        await waitForImages(rackNodeRef.current)
+        await exportPNG(rackNodeRef.current, rack)
+      })
       flash('Exported PNG', 'success')
     } catch (err) {
       console.error(err)
@@ -352,11 +355,12 @@ export default function App() {
     if (rack.bays.length < 2) return
     setExporting(true)
     try {
-      await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
-      for (const bay of rack.bays) {
-        await waitForImages(bayRefs.current[bay.id])
-      }
-      await exportBayPNGs(rack, bayRefs.current)
+      await viewportRef.current?.withNativeZoom(async () => {
+        for (const bay of rack.bays) {
+          await waitForImages(bayRefs.current[bay.id])
+        }
+        await exportBayPNGs(rack, bayRefs.current)
+      })
       flash(`Exported ${rack.bays.length} bay PNGs`, 'success')
     } catch (err) {
       console.error(err)
@@ -456,21 +460,23 @@ export default function App() {
             <div className="app-body">
               <Catalog />
               <main className="workspace">
-                <RackCanvas
-                  ref={rackNodeRef}
-                  bayRefs={bayRefs}
-                  rack={rack}
-                  preview={showPreview}
-                  onRenameRack={onRenameRack}
-                  onRenameBay={onRenameBay}
-                  onRemoveBay={onRemoveBay}
-                  onAddBay={onAddBay}
-                  onAddRow={onAddRow}
-                  onRemoveRow={onRemoveRow}
-                  onAddCol={onAddCol}
-                  onRemoveCol={onRemoveCol}
-                  onRemovePlacement={onRemovePlacement}
-                />
+                <RackViewport ref={viewportRef}>
+                  <RackCanvas
+                    ref={rackNodeRef}
+                    bayRefs={bayRefs}
+                    rack={rack}
+                    preview={showPreview}
+                    onRenameRack={onRenameRack}
+                    onRenameBay={onRenameBay}
+                    onRemoveBay={onRemoveBay}
+                    onAddBay={onAddBay}
+                    onAddRow={onAddRow}
+                    onRemoveRow={onRemoveRow}
+                    onAddCol={onAddCol}
+                    onRemoveCol={onRemoveCol}
+                    onRemovePlacement={onRemovePlacement}
+                  />
+                </RackViewport>
               </main>
             </div>
 
